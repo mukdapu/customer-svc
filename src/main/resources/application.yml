@@ -11,7 +11,7 @@ spring:
     url: ${DB_URL:jdbc:mysql://localhost:3306/customer_svc_dev?useUnicode=yes&characterEncoding=utf8}
     driver-class-name: ${DB_DRIVER_CLASS:com.mysql.cj.jdbc.Driver}
     username: ${DB_USER:root}
-    password: ${DB_PASS:P@ssw111rd}
+    password: ${DB_PASS:root}
   jpa:
     show-sql: true
     hibernate:
