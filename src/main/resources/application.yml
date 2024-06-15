@@ -1,0 +1,38 @@
+contextPath: /customer-svc
+eureka:
+  client:
+    enabled: false
+spring:
+  application:
+    name: customer-svc
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:native}
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/customer_svc_dev?useUnicode=yes&characterEncoding=utf8}
+    driver-class-name: ${DB_DRIVER_CLASS:com.mysql.cj.jdbc.Driver}
+    username: ${DB_USER:root}
+    password: ${DB_PASS:P@ssw111rd}
+  jpa:
+    show-sql: true
+    hibernate:
+      use-new-id-generator-mappings: false
+    properties.hibernate.proc:
+      param_null_passing: true
+  flyway:
+    locations: classpath:/db/migration,classpath:/mysql/db/migration,classpath:/dev/db/migration
+  jackson:
+    default-property-inclusion: NON_NULL
+    serialization:
+      write-dates-as-timestamps: false
+server:
+  port: ${SERVER_PORT:8080}
+---
+spring:
+  profiles: test
+  datasource:
+    driver-class-name: ${DB_DRIVER_CLASS:org.h2.Driver}
+    url: ${DB_URL:jdbc:h2:mem:common_svc;MODE=MySQL;DB_CLOSE_DELAY=-1;REFERENTIAL_INTEGRITY=FALSE;DB_CLOSE_ON_EXIT=FALSE;INIT=RUNSCRIPT FROM 'classpath:/h2/db/migration/init_tests.sql';}
+    username: ${DB_USER:sa}
+    password: ${DB_PASS:}
+  flyway:
+    locations: classpath:/db/migration,classpath:/h2/db/migration
