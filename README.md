@@ -31,7 +31,7 @@ is Java 17 and Maven installed in the build server.
 
 This application uses MySQL DB. The development was done with MySQL 8
 
-* How to run tests (Unit and Integration)
+* How to run tests (Both Unit and Integration tests)
 
   `mvn clean install` or `mvn test`
 Note: we use H2 DB for Integration Tests. 
@@ -40,11 +40,11 @@ Note: we use H2 DB for Integration Tests.
 
 ### How to set up customer application? ###
 
-**1)  Download and install MySQL DB:**
-** 2) Create new database
-** 3) Adjust environment values to point to the new db (URL, credentials)
-** 4) Run the application using `mvn spring-boot:run` or using Docker. For Docker, create docker image using `docker build -t <tag name> .` from the project root folder  
-
+**1)  Download and install MySQL DB 8:**
+** 2) Create new database.
+** 3) Adjust environment values to point to the new db (URL, credentials).
+** 4) Run the application using `mvn spring-boot:run` or using Docker. For Docker, create docker image using `docker build -t <tag name> .` from the project root folder.  
+** 5) Swagger API documentation can be accessed at URL: `http://localhost:8080/swagger-ui/index.html`.    
 
 ### Contribution guidelines ###
 
