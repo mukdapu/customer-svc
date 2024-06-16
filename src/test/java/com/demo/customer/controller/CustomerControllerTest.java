@@ -36,12 +36,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(CustomerController.class)
 class CustomerControllerTest extends BaseControllerTest {
 
+    @Autowired
+    protected MockMvc mvc;
     @MockBean
     private CustomerService service;
     @MockBean
     private MapperService mapperService;
-    @Autowired
-    protected MockMvc mvc;
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -103,7 +103,8 @@ class CustomerControllerTest extends BaseControllerTest {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get(EndPointConstants.CUSTOMERS)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .headers(headers)
-                .with(csrf());;
+                .with(csrf());
+        ;
 
         // Then
         mvc.perform(requestBuilder)

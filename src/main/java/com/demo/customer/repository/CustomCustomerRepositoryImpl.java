@@ -9,12 +9,21 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
+/**
+ * Custom Repository implementation for Customer.
+ */
 
 class CustomCustomerRepositoryImpl implements CustomCustomerRepository {
 
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * Custom method to search customers based on the search criteria.
+     *
+     * @param searchRequest CustomerSearchRequest
+     * @return List<Customer>
+     */
     @Override
     public List<Customer> fetchCustomersBy(CustomerSearchRequest searchRequest) {
         StringBuilder query = new StringBuilder(QueryStrings.FETCH_CUSTOMERS_QUERY);

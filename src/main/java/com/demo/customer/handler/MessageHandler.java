@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Locale;
 
+/**
+ * Handler class to manage messages from messages.properties .
+ */
+
 @Component
 @RequiredArgsConstructor
 public class MessageHandler {

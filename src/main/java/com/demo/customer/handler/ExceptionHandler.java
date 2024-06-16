@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Locale;
 
+/**
+ * Handler class for all kinds of Exceptions.
+ */
+
 @Component
 @RequiredArgsConstructor
 public class ExceptionHandler {

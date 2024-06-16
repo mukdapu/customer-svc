@@ -28,6 +28,11 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Controller class for managing Customer resource.
+ * <p>
+ * This class has controller methods to expose various APIs for the customer resource.
+ */
 
 @RestController
 @RequestMapping
@@ -37,6 +42,12 @@ public class CustomerController {
     private final CustomerService service;
     private final MapperService mapperService;
 
+    /**
+     * Creates a new customer.
+     *
+     * @param request CustomerRequest
+     * @return ResponseEntity<CustomerResponse>
+     */
     @Operation(description = "Create customer")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Success", content = {
@@ -58,6 +69,19 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(mapperService.converToCustomerResponse(customer));
     }
 
+
+    /**
+     * Fetches a list of customer based on the input search criteria (query param).
+     *
+     * @param firstName String
+     * @param lastName  String
+     * @param city      String
+     * @param state     String
+     * @param limit     Integer
+     * @param offset    Integer
+     * @return ResponseEntity<List < CustomerResponse>>
+     */
+
     @Operation(description = "Fetch customers")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success", content = {
@@ -73,7 +97,7 @@ public class CustomerController {
                     })
     })
     @GetMapping(EndPointConstants.CUSTOMERS)
-    public ResponseEntity<List<CustomerResponse>> fetchCustomers(@RequestParam(value="firstName",required = false) String firstName, @RequestParam(value="lastName",required = false) String lastName, @RequestParam(value="city",required = false) String city, @RequestParam(value="state",required = false) String state, @RequestParam(value="limit",required = false, defaultValue = "100") Integer limit, @RequestParam(value="offset",required = false, defaultValue = "0") Integer offset) {
+    public ResponseEntity<List<CustomerResponse>> fetchCustomers(@RequestParam(value = "firstName", required = false) String firstName, @RequestParam(value = "lastName", required = false) String lastName, @RequestParam(value = "city", required = false) String city, @RequestParam(value = "state", required = false) String state, @RequestParam(value = "limit", required = false, defaultValue = "100") Integer limit, @RequestParam(value = "offset", required = false, defaultValue = "0") Integer offset) {
         CustomerSearchRequest request = new CustomerSearchRequest(firstName, lastName, city, state, limit, offset);
         List<Customer> customerList = service.fetchCustomers(request);
         return ResponseEntity.status(HttpStatus.OK).body(mapperService.converToCustomerResponseList(customerList));

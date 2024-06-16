@@ -18,6 +18,7 @@ public class AddressRequest {
     private String city;
     @NotBlank(message = "cus-6")
     private String state;
-    @NotNull@NotBlank(message = "cus-7")
+    @NotNull
+    @NotBlank(message = "cus-7")
     private String zip;
 }

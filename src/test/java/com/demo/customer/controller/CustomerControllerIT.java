@@ -79,7 +79,7 @@ class CustomerControllerIT extends BaseControllerIT {
     void shouldFetchCustomers() {
         //given
         Customer customer = DataMaker.makeCustomer();
-        customer.getAddress().forEach(address->address.setCustomer(customer));
+        customer.getAddress().forEach(address -> address.setCustomer(customer));
         customerRepository.save(customer);
 
         TestRestTemplate restTemplate = getTestRestTemplate();
@@ -105,7 +105,7 @@ class CustomerControllerIT extends BaseControllerIT {
     void shouldFetchNoCustomers() {
         //given
         Customer customer = DataMaker.makeCustomer();
-        customer.getAddress().forEach(address->address.setCustomer(customer));
+        customer.getAddress().forEach(address -> address.setCustomer(customer));
         customerRepository.save(customer);
 
         TestRestTemplate restTemplate = getTestRestTemplate();

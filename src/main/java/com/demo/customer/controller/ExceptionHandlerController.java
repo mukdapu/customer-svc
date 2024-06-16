@@ -30,11 +30,16 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     @Value("#{'${spring.application.name:}'}")
     private String appName;
 
-    public ExceptionHandlerController(MessageSource messageSource){
+    public ExceptionHandlerController(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
 
-
+    /**
+     * Handles General exception raised by the system.
+     *
+     * @param ex Exception
+     * @return ResponseEntity<ApiErrorDto>
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiErrorDto> handleGeneralException(Exception ex) {
         String serverErrorKey = "cust-100";
@@ -44,6 +49,12 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, error.getStatus());
     }
 
+    /**
+     * Handles System exceptions
+     *
+     * @param ex Exception
+     * @return ResponseEntity<ApiErrorDto>
+     */
     @ExceptionHandler(SystemException.class)
     public ResponseEntity<ApiErrorDto> handleSystemException(Exception ex) {
         String messageKey = ((SystemException) ex).getMessageKey();
@@ -60,6 +71,12 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, error.getStatus());
     }
 
+    /**
+     * Handles Validation exception raised.
+     *
+     * @param ex Exception
+     * @return ResponseEntity<ApiErrorDto>
+     */
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<ApiErrorDto> handleApplicationValidationException(Exception ex) {
         String messageKey = ((ValidationException) ex).getMessageKey();
@@ -77,8 +94,10 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * @param ex
-     * @return
+     * Returns error message from the localized message in the exception
+     *
+     * @param ex Exception
+     * @return String
      */
     private String getErrorMessage(Exception ex) {
         StringBuilder sb = new StringBuilder();
@@ -92,24 +111,62 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     }
 
+    /**
+     * Get Message from the MessageSource for the key.
+     *
+     * @param key String
+     * @return String
+     */
     private String getMessage(String key) {
         return messageSource.getMessage(key, null, LocaleContextHolder.getLocale());
     }
 
+    /**
+     * Get Message from the MessageSource for the key with params.
+     *
+     * @param key    String
+     * @param params Object[]
+     * @return String
+     */
     private String getMessage(String key, Object[] params) {
         return messageSource.getMessage(key, params, LocaleContextHolder.getLocale());
     }
 
+    /**
+     * Get message to be logged for system monitoring.
+     * private String getLogMessage(String key, Object[] params, String message) {
+     *
+     * @param key     String
+     * @param params  Object[]
+     *                private String getLogMessage(String key, Object[] params, String message) {
+     * @param message String
+     * @return String
+     */
     private String getLogMessage(String key, Object[] params, String message) {
         Locale locale = LocaleContextHolder.getLocale();
         return locale.equals(AppConstants.LOG_LOCALE) ? message
                 : messageSource.getMessage(key, params, AppConstants.LOG_LOCALE);
     }
 
+    /**
+     * Get Cause in String format from the exception.
+     *
+     * @param ex String
+     * @return String
+     */
     private String getCause(Exception ex) {
         return ex.getCause() != null ? ex.getCause().getLocalizedMessage() : null;
     }
 
+    /**
+     * Build Error object to be returned by the API response
+     *
+     * @param ex         Exception
+     * @param messageKey String
+     * @param message    String
+     * @param status     String
+     * @return ApiErrorDto
+     */
     private ApiErrorDto getApiError(Exception ex, String messageKey, String message, HttpStatus status) {
         return ApiErrorDto.builder().status(status).dateTime(Instant.now()).messageKey(messageKey).message(message)
                 .cause(getCause(ex)).build();

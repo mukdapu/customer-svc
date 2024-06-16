@@ -22,7 +22,7 @@ import java.util.List;
 @Entity
 @Table(name = "customer")
 @Data
-@EqualsAndHashCode(callSuper = false, of = "id" )
+@EqualsAndHashCode(callSuper = false, of = "id")
 public class Customer extends Base implements Serializable {
     @Serial
     private static final long serialVersionUID = -4204488018990828372L;

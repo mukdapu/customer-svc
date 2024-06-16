@@ -26,6 +26,22 @@ class CustomerServiceTest {
     @Mock
     private CustomerRepository customerRepository;
 
+    private static void doAssertion(Customer actual, Customer customer, Address address) {
+        assertThat(actual.getId()).isEqualTo(customer.getId());
+        assertThat(actual.getFirstName()).isEqualTo(customer.getFirstName());
+        assertThat(actual.getLastName()).isEqualTo(customer.getLastName());
+        assertThat(actual.getAge()).isEqualTo(customer.getAge());
+        assertThat(actual.getMobileNumber()).isEqualTo(customer.getMobileNumber());
+        assertThat(customer.getAddress()).hasSize(1);
+        Address actualAddress = customer.getAddress().get(0);
+        assertThat(actualAddress.getId()).isEqualTo(address.getId());
+        assertThat(actualAddress.getAddress1()).isEqualTo(address.getAddress1());
+        assertThat(actualAddress.getAddress2()).isEqualTo(address.getAddress2());
+        assertThat(actualAddress.getCity()).isEqualTo(address.getCity());
+        assertThat(actualAddress.getState()).isEqualTo(address.getState());
+        assertThat(actualAddress.getZip()).isEqualTo(address.getZip());
+    }
+
     @Test
     void shouldCreateCustomer() {
         //given
@@ -58,21 +74,5 @@ class CustomerServiceTest {
         Customer actual = customers.get(0);
         Address address = customer.getAddress().get(0);
         doAssertion(actual, customer, address);
-    }
-
-    private static void doAssertion(Customer actual, Customer customer, Address address) {
-        assertThat(actual.getId()).isEqualTo(customer.getId());
-        assertThat(actual.getFirstName()).isEqualTo(customer.getFirstName());
-        assertThat(actual.getLastName()).isEqualTo(customer.getLastName());
-        assertThat(actual.getAge()).isEqualTo(customer.getAge());
-        assertThat(actual.getMobileNumber()).isEqualTo(customer.getMobileNumber());
-        assertThat(customer.getAddress()).hasSize(1);
-        Address actualAddress = customer.getAddress().get(0);
-        assertThat(actualAddress.getId()).isEqualTo(address.getId());
-        assertThat(actualAddress.getAddress1()).isEqualTo(address.getAddress1());
-        assertThat(actualAddress.getAddress2()).isEqualTo(address.getAddress2());
-        assertThat(actualAddress.getCity()).isEqualTo(address.getCity());
-        assertThat(actualAddress.getState()).isEqualTo(address.getState());
-        assertThat(actualAddress.getZip()).isEqualTo(address.getZip());
     }
 }

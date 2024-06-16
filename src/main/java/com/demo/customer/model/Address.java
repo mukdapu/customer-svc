@@ -20,7 +20,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "address")
 @Data
-@EqualsAndHashCode(callSuper = false, of = "id" )
+@EqualsAndHashCode(callSuper = false, of = "id")
 public class Address extends Base implements Serializable {
     @Serial
     private static final long serialVersionUID = -4204488018900828368L;
@@ -48,7 +48,7 @@ public class Address extends Base implements Serializable {
     @Column(name = "zip")
     private String zip;
 
-	@ManyToOne
-	@JoinColumn(name = "customer_id", nullable=false, updatable = false)
-	private Customer customer;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false, updatable = false)
+    private Customer customer;
 }

@@ -17,10 +17,10 @@ public class CustomerListComparisonTest {
         List<Customer> customerListA = List.of(makeData(1L, "Bill", "Carson"),
                 makeData(2L, "Adam", "Sandler"),
                 makeData(3L, "Clint", "Eastwood"));
-        List<Customer>  customerListListB = List.of(makeData(2L, "Adam", "Sandler"),
+        List<Customer> customerListListB = List.of(makeData(2L, "Adam", "Sandler"),
                 makeData(4L, "Joe", "Biden"),
-                makeData(5L, "Eddy",  "Murphy"),
-                makeData(6L, "James",  "Bond"));
+                makeData(5L, "Eddy", "Murphy"),
+                makeData(6L, "James", "Bond"));
 
         // Customers in A
         List<Customer> onlyInListA = new ArrayList<>(customerListA);
@@ -40,7 +40,7 @@ public class CustomerListComparisonTest {
         log.info("Customers in both list A and list B: " + inBothLists);
     }
 
-    private static Customer makeData(Long id, String firstName, String lastName){
+    private static Customer makeData(Long id, String firstName, String lastName) {
         Customer customer = new Customer();
         customer.setId(id);
         customer.setFirstName(firstName);

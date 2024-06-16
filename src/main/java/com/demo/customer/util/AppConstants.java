@@ -4,9 +4,9 @@ import java.util.Locale;
 
 public class AppConstants {
 
+    public static final Locale LOG_LOCALE = Locale.US;
+
     private AppConstants() {
     }
-
-    public static final Locale LOG_LOCALE = Locale.US;
 
 }

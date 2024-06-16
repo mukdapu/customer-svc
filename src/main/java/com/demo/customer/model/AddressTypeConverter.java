@@ -3,7 +3,6 @@ package com.demo.customer.model;
 
 import com.demo.customer.enums.AddressType;
 
-
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 

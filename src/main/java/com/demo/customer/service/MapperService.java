@@ -11,10 +11,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Mapper service that maps entity to response DTO and from Request DTO to entity.
+ */
+
 @Service
 public class MapperService {
 
-    private ModelMapper mapper;
+    private final ModelMapper mapper;
 
     public MapperService(ModelMapper modelMapper) {
         this.mapper = modelMapper;
@@ -31,7 +35,7 @@ public class MapperService {
 
     public Customer converToCustomer(CustomerRequest request) {
         Customer customer = mapper.map(request, Customer.class);
-        request.getAddress().forEach(address->  customer.getAddress().add(converToAddress(address, customer)));
+        request.getAddress().forEach(address -> customer.getAddress().add(converToAddress(address, customer)));
         return customer;
     }
 
