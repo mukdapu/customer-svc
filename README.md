@@ -21,6 +21,7 @@ Using -e in docker, modify environment variables defined in the `application.yml
 
 - **DB_URL**: Set the value to override default uri: jdbc:mysql://localhost:3306/customer_svc_dev.
 - **SERVER_PORT**: The default port is 8080. Set this property to change the app server port.
+- **DB_USER** and **DB_PASS** : Set the value to override default DB credentials.
 
 * Dependencies
 
@@ -40,17 +41,10 @@ Note: we use H2 DB for Integration Tests.
 
 ### How to set up customer application? ###
 
-**1)  Download and install MySQL DB 8:**
-** 2) Create new database.
-** 3) Adjust environment values to point to the new db (URL, credentials).
-** 4) Run the application using `mvn spring-boot:run` or using Docker. For Docker, create docker image using `docker build -t <tag name> .` from the project root folder.  
-** 5) Swagger API documentation can be accessed at URL: `http://localhost:8080/swagger-ui/index.html`.    
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-
-### Who do I talk to? ###
+* Download and install MySQL DB 8:**
+* Create new database with a preferred name.
+* Adjust environment values to point to the new db (URL, credentials etc).
+* Run the application using `mvn spring-boot:run` or using Docker. For Docker, create docker image using `docker build -t <tag name> .` from the project root folder. Remember to set environment variables in each case.  
+* Swagger API documentation can be accessed at URL: `http://localhost:8080/swagger-ui/index.html`.
 
 
